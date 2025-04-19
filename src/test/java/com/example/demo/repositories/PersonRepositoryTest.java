@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,17 +34,16 @@ public class PersonRepositoryTest {
     @Test
     @DisplayName("List person")
     public void testFindAll(){
-        List<Person> persons = List.of(
-                new Person("Ana", 25),
-                new Person("Carlos", 30),
-                new Person("María", 28)
-        );
+        List<Person> persons = new ArrayList<>();
+                persons.add(new Person("Alfredo", 20));
+                persons.add(new Person("Carlos", 30));
+                persons.add(new Person("María", 28));
         personRepository.saveAll(persons);
         List<Person> personsList = personRepository.findAll();
         System.out.println(personsList);
-        assertEquals(23, personsList.size());
-        assertEquals("Pedro", personsList.get(0).getName());
-        assertEquals(20, personsList.get(0).getAge());
+        assertEquals(10, personsList.size());
+        assertEquals("Maria", personsList.get(0).getName());
+        assertEquals(28, personsList.get(0).getAge());
     }
 
     @Test
@@ -75,10 +75,5 @@ public class PersonRepositoryTest {
 
         System.out.println(personRepository.findById(person1.getId()).orElse(null));
     }
-
-
-
-
-
 
 }
